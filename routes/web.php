@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth'])->group(function () {
+  Route::get('todos', function () {
+    return view('todos.index');
+  })->name('todos.index');
+});
