@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,15 @@ class DailySession extends Model
     protected $casts = [
         'date' => 'datetime',
     ];
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+      parent::boot();
+      static::addGlobalScope(new UserScope);
+    }
+
 }

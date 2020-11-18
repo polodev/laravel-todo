@@ -20,11 +20,12 @@ class CreateTodosTable extends Migration
             $table->string('slug');
             $table->boolean('is_completed')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->string('when')->nullable(); // 10 am - 10.45 minutes
 
 
             $table->text('remarks')->nullable();
             $table->integer('order')->default(1);
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
 

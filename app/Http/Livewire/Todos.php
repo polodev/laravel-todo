@@ -9,11 +9,17 @@ class Todos extends Component
 {
     public $todos = [];
     public $title;
+    public $when;
     public $remarks;
     public $order = 1;
     public $is_active = true;
     public $updateMode = false;
     public $orderBy = 'order';
+
+    protected $rules = [
+      'title' => 'required',
+    ];
+
 
     public function getTodos()
     {
@@ -22,7 +28,7 @@ class Todos extends Component
 
     public function render()
     {
-      return view('livewire.todos');
+      return view('livewire.todos.index');
     }
     
   
@@ -36,6 +42,7 @@ class Todos extends Component
         $this->remarks = '';
         $this->order = 1;
         $this->is_active = true;
+        $this->when = '';
     }
    
     /**
@@ -43,18 +50,22 @@ class Todos extends Component
      *
      * @var array
      */
-    public function store()
+    public function create_todo()
     {
-        $validatedDate = $this->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
-  
-        Post::create($validatedDate);
-  
-        session()->flash('message', 'Post Created Successfully.');
-  
-        $this->resetInputFields();
+      $this->validate();
+
+      $data = [
+        'title' => $this->title,
+        'when' => $this->when,
+        'remarks' => $this->remarks,
+        'order' => $this->order,
+      ];
+      $todo = Todo::create($data);
+
+      session()->flash('message:create_todo', 'Todo Created Successfully');
+
+      $this->resetInputFields();
+      $this->getTodos();
     }
   
     /**

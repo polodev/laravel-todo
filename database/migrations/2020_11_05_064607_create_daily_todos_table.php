@@ -21,6 +21,7 @@ class CreateDailyTodosTable extends Migration
             $table->string('slug');
             $table->boolean('is_completed')->default(false);
             $table->integer('duration')->default(0);
+            $table->string('when')->nullable(); // 10 am - 10.45 minutes
 
             $table->text('remarks')->nullable();
             $table->integer('order')->default(1);

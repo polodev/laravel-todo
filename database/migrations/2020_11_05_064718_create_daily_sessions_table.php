@@ -17,7 +17,7 @@ class CreateDailySessionsTable extends Migration
             $table->id();
 
             $table->dateTime('date');
-            $table->string('when'); // 10 am - 10.45 minutes
+            $table->string('when')->nullable(); // 10 am - 10.45 minutes
             $table->integer('duration'); // in minutes;
             $table->string('topic');
 
